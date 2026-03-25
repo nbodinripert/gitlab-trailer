@@ -7,5 +7,6 @@
     "config.token": "Tu token de acceso personal de GitLab",
     "config.project": "La ruta completa de tu proyecto",
     "config.instance": "URL de tu instancia de GitLab",
-    "welcome.content": "Bienvenido a GitLab Trailer.\nPara comenzar, configura tu Token y la ruta del Proyecto.\n[Configurar ajustes](command:workbench.action.openSettings?%22gitlabTrailer%22)"
+    "welcome.content": "Bienvenido a GitLab Trailer.\nPara comenzar, configura tu Token y la ruta del Proyecto.\n[Configurar ajustes](command:workbench.action.openSettings?%22gitlabTrailer%22)",
+    "extension.description": "Sigue tus Merge Requests de GitLab con notificaciones y estados de un vistazo."
 }
