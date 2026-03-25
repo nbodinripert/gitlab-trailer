@@ -1,7 +1,7 @@
 {
   "name": "gitlab-trailer",
   "displayName": "GitLab MR Trailer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "NicolasBodinRipert",
   "icon": "icon.png",
   "description": "%extension.description%",
