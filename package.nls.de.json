@@ -1,0 +1,11 @@
+{
+    "view.toReview": "Zu Prüfen",
+    "view.myOpenMrs": "Meine Offenen MRs",
+    "view.recentlyMerged": "Kürzlich Zusammengeführt",
+    "msg.newToken": "📥 Neue MR zum Prüfen: {0}",
+    "msg.open": "Öffnen",
+    "config.token": "Ihr persönliches GitLab-Zugriffstoken",
+    "config.project": "Der vollständige Pfad Ihres Projekts",
+    "config.instance": "URL Ihrer GitLab-Instanz",
+    "welcome.content": "Willkommen bei GitLab Trailer.\nKonfigurieren Sie zu Beginn Ihr Token und Ihren Projektpfad.\n[Einstellungen konfigurieren](command:workbench.action.openSettings?%22gitlabTrailer%22)"
+}

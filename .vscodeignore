@@ -1,0 +1,17 @@
+.vscode/**
+.vscode-test/**
+node_modules/**
+src/**
+.gitignore
+.yarnrc
+esbuild.js
+vsc-extension-quickstart.md
+**/tsconfig.json
+**/eslint.config.mjs
+**/*.map
+**/*.ts
+**/.vscode-test.*
+# On s'assure de GARDER les fichiers NLS et les icônes s'il y en a
+!package.nls.json
+!package.nls.*.json
+!out/**

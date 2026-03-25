@@ -1,0 +1,91 @@
+{
+  "name": "gitlab-trailer",
+  "displayName": "GitLab MR Trailer",
+  "version": "1.0.0",
+  "publisher": "ton-nom",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "GitLab Trailer",
+      "properties": {
+        "gitlabTrailer.apiToken": {
+          "description": "%config.token%"
+        },
+        "gitlabTrailer.instanceUrl": {
+          "default": "https://gitlab.com",
+          "description": "%config.instance%"
+        },
+        "gitlabTrailer.projectPath": {
+          "description": "%config.project%"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "gitlab-trailer-view",
+          "title": "GitLab MRs",
+          "icon": "$(git-pull-request)"
+        }
+      ]
+    },
+    "views": {
+      "gitlab-trailer-view": [
+        {
+          "id": "mrExplorer",
+          "name": "Merge Requests",
+          "icon": "$(git-pull-request)"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "mrExplorer",
+        "contents": "%welcome.content%"
+      }
+    ],
+    "commands": [
+      {
+        "command": "gitlabTrailer.refreshEntry",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "gitlabTrailer.refreshEntry",
+          "when": "view == mrExplorer",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.75.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "axios": "^1.3.4"
+  }
+}
