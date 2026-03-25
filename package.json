@@ -2,8 +2,16 @@
   "name": "gitlab-trailer",
   "displayName": "GitLab MR Trailer",
   "version": "1.0.0",
-  "publisher": "ton-nom",
+  "publisher": "NicolasBodinRipert",
   "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nbodinripert/gitlab-trailer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nbodinripert/gitlab-trailer/issues"
+  },
+  "homepage": "https://github.com/nbodinripert/gitlab-trailer#readme",
   "engines": {
     "vscode": "^1.75.0"
   },
