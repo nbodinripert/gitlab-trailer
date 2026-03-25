@@ -1,7 +1,7 @@
 {
   "name": "gitlab-trailer",
   "displayName": "GitLab MR Trailer",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "publisher": "NicolasBodinRipert",
   "icon": "icon.png",
   "description": "%extension.description%",
@@ -18,6 +18,9 @@
   },
   "categories": [
     "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
