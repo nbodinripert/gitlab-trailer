@@ -2,7 +2,6 @@
 .vscode/**
 .vscode-test/**
 src/**
-node_modules/**
 .gitignore
 .yarnrc
 esbuild.js
@@ -11,6 +10,8 @@ tsconfig.json
 eslint.config.mjs
 **/*.map
 **/*.ts
+
+# ON NE MET PLUS node_modules/** ICI !
 
 # Fichiers de test
 out/test/**
