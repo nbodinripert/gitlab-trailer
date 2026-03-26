@@ -7,8 +7,8 @@
     "config.token": "Il tuo token di accesso personale GitLab",
     "config.project": "Il percorso completo del tuo progetto",
     "config.instance": "URL della tua istanza GitLab",
-    "config.aiProvider": "Scegli il tuo provider IA per i riassunti delle MR",
-    "config.aiApiKey": "Chiave API per il provider IA scelto",
-    "welcome.content": "Benvenuto in GitLab Trailer.\nPer iniziare, configura il tuo Token e il percorso del progetto.\n[Configura Impostazioni](command:workbench.action.openSettings?%22gitlabTrailer%22)",
-    "extension.description": "Monitora le Merge Request di GitLab e usa l'IA per riassumerle automaticamente."
+    "config.aiProvider": "Scegli il tuo provider IA",
+    "config.aiApiKey": "Chiave API per il provider IA",
+    "welcome.content": "Benvenuto in GitLab Pulse.\nPer iniziare, configura il tuo Token e il percorso del progetto.\n[Configura Impostazioni](command:workbench.action.openSettings?%22gitlabTrailer%22)",
+    "extension.description": "Monitoraggio intelligente e riassunti IA per le tue Merge Request di GitLab."
 }

@@ -1,7 +1,7 @@
 {
   "name": "gitlab-trailer",
-  "displayName": "GitLab MR Trailer",
-  "version": "2.0.0",
+  "displayName": "GitLab Pulse",
+  "version": "2.1.0",
   "publisher": "NicolasBodinRipert",
   "icon": "icon.png",
   "description": "Track GitLab merge requests and use AI to auto-summarize them.",
@@ -26,7 +26,7 @@
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
-      "title": "GitLab Trailer",
+      "title": "GitLab Pulse",
       "properties": {
         "gitlabTrailer.apiToken": {
           "type": "string",
@@ -60,7 +60,7 @@
       "activitybar": [
         {
           "id": "gitlab-trailer-view",
-          "title": "GitLab MRs",
+          "title": "GitLab Pulse",
           "icon": "$(git-pull-request)"
         }
       ]

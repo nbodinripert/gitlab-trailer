@@ -9,6 +9,6 @@
     "config.instance": "URL of your GitLab instance",
     "config.aiProvider": "Choose your AI provider for MR summaries",
     "config.aiApiKey": "API Key for your chosen AI provider",
-    "welcome.content": "Welcome to GitLab Trailer.\nTo start, configure your Token and Project Path.\n[Configure Settings](command:workbench.action.openSettings?%22gitlabTrailer%22)",
-    "extension.description": "Track GitLab merge requests and use AI to auto-summarize them at a glance."
+    "welcome.content": "Welcome to GitLab Pulse.\nTo start, configure your Token and Project Path.\n[Configure Settings](command:workbench.action.openSettings?%22gitlabTrailer%22)",
+    "extension.description": "Smart, AI-powered insights for your GitLab Merge Requests."
 }
