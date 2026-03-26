@@ -1,7 +1,7 @@
 {
   "name": "gitlab-trailer",
   "displayName": "GitLab MR Trailer",
-  "version": "2.0.1",
+  "version": "2.0.0",
   "publisher": "NicolasBodinRipert",
   "icon": "icon.png",
   "description": "Track GitLab merge requests and use AI to auto-summarize them.",
