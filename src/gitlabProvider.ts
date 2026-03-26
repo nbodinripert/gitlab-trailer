@@ -65,17 +65,17 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
         if (!element) {
             return [
                 new MRItem(this.toBold(l10n.t('toReview')), "reviewer", vscode.TreeItemCollapsibleState.Expanded, new vscode.ThemeIcon("eye", new vscode.ThemeColor("charts.blue"))),
-                new MRItem(this.toBold(l10n.t('myOpen')), "opened", vscode.TreeItemCollapsibleState.Collapsed, new vscode.ThemeIcon("git-pull-request", new vscode.ThemeColor("charts.orange"))),
-                // FIX: On s'assure que l'icône est bien instanciée
+                new MRItem(this.toBold(l10n.t('myOpen')), "opened", vscode.TreeItemCollapsibleState.Expanded, new vscode.ThemeIcon("git-pull-request", new vscode.ThemeColor("charts.orange"))),
                 new MRItem(this.toBold(l10n.t('merged')), "merged", vscode.TreeItemCollapsibleState.Collapsed, new vscode.ThemeIcon("check", new vscode.ThemeColor("charts.green")))
             ];
         }
 
+        // --- DÉTAILS DE LA MR ---
         if (element.contextValue === "mr-item") {
             return this.getMRDetails(element.mrData, baseUrl, token, projectPath);
         }
 
-        // --- NIVEAU 2 : MERGE REQUESTS ---
+        // --- NIVEAU 2 : LISTE DES MERGE REQUESTS ---
         try {
             if (!this.myUserId) {
                 const { data: user } = await axios.get(`${baseUrl}/api/v4/user`, { headers: { 'PRIVATE-TOKEN': token } });
@@ -103,7 +103,7 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
 
             return data.map((mr: any) => {
                 const initialState = element.contextValue === 'merged' 
-                    ? vscode.TreeItemCollapsibleState.Collapsed 
+                    ? vscode.TreeItemCollapsibleState.None 
                     : vscode.TreeItemCollapsibleState.Expanded;
 
                 const item = new MRItem(
@@ -153,15 +153,39 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
 
         // Reviewers & Approvals
         try {
-            const { data: app } = await axios.get(`${baseUrl}/api/v4/projects/${projectPath}/merge_requests/${mr.iid}/approvals`, { headers: { 'PRIVATE-TOKEN': token } });
+            // Lancement de 2 requêtes en parallèle
+            const [appRes, revRes] = await Promise.all([
+                axios.get(`${baseUrl}/api/v4/projects/${projectPath}/merge_requests/${mr.iid}/approvals`, { headers: { 'PRIVATE-TOKEN': token } }),
+                axios.get(`${baseUrl}/api/v4/projects/${projectPath}/merge_requests/${mr.iid}/reviewers`, { headers: { 'PRIVATE-TOKEN': token } }).catch(() => ({ data: [] }))
+            ]);
+            
+            // CORRECTION ICI : r.user.id au lieu de r.id
+            const approvedIds = new Set(appRes.data.approved_by?.map((a: any) => a.user.id) || []);
+            const reviewerStates = new Map(revRes.data.map((r: any) => [r.user.id, r.state]));
+
             (mr.reviewers || []).forEach((rev: any) => {
-                const ok = app.approved_by?.some((a: any) => a.user.id === rev.id);
-                const icon = ok 
-                    ? new vscode.ThemeIcon("check", new vscode.ThemeColor("charts.green")) 
-                    : new vscode.ThemeIcon("circle-outline", new vscode.ThemeColor("descriptionForeground"));
+                const isApproved = approvedIds.has(rev.id);
+                // On récupère le statut depuis notre Map
+                const realReviewState = reviewerStates.get(rev.id); 
+                const requestedChanges = realReviewState === 'request_changes' || realReviewState === 'requested_changes';
+
+                let icon;
+                if (requestedChanges) {
+                    // Croix rouge
+                    icon = new vscode.ThemeIcon("error", new vscode.ThemeColor("charts.red"));
+                } else if (isApproved) {
+                    // Validation verte
+                    icon = new vscode.ThemeIcon("check", new vscode.ThemeColor("charts.green"));
+                } else {
+                    // Cercle vide
+                    icon = new vscode.ThemeIcon("circle-outline", new vscode.ThemeColor("descriptionForeground"));
+                }
+
                 items.push(new MRItem(rev.name || rev.username, "rev", vscode.TreeItemCollapsibleState.None, icon));
             });
-        } catch (e) {}
+        } catch (e) {
+            console.error("Failed to fetch MR details", e);
+        }
 
         return items;
     }
