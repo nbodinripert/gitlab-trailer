@@ -7,6 +7,8 @@
     "config.token": "Ihr persönliches GitLab-Zugriffstoken",
     "config.project": "Der vollständige Pfad Ihres Projekts",
     "config.instance": "URL Ihrer GitLab-Instanz",
-    "welcome.content": "Willkommen bei GitLab Trailer.\nKonfigurieren Sie zu Beginn Ihr Token und Ihren Projektpfad.\n[Einstellungen konfigurieren](command:workbench.action.openSettings?%22gitlabTrailer%22)",
-    "extension.description": "Verfolgen Sie GitLab Merge Requests mit Benachrichtigungen und Status auf einen Blick."
+    "config.aiProvider": "Wählen Sie Ihren KI-Anbieter für MR-Zusammenfassungen",
+    "config.aiApiKey": "API-Schlüssel für den gewählten KI-Anbieter",
+    "welcome.content": "Willkommen bei GitLab Trailer.\nKonfigurieren Sie zunächst Ihr Token und den Projektpfad.\n[Einstellungen konfigurieren](command:workbench.action.openSettings?%22gitlabTrailer%22)",
+    "extension.description": "Verfolgen Sie GitLab Merge Requests und nutzen Sie KI zur automatischen Zusammenfassung."
 }
