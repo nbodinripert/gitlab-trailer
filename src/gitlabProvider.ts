@@ -220,7 +220,16 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
                 const { data: changesData } = await axios.get(`${baseUrl}/api/v4/projects/${projectPath}/merge_requests/${item.mrData.iid}/changes`, { headers: { 'PRIVATE-TOKEN': token } });
                 let diffText = changesData.changes.map((c: any) => `File: ${c.new_path}\n${c.diff}`).join('\n\n').substring(0, 15000);
                 
-                const prompt = `Summarize these GitLab MR changes in English (max 10 sentences). Rules: Concise, no intro/outro.\n\n${diffText}`;
+                const prompt = `You are a senior software engineer reviewing a GitLab merge request. Analyze the following diff and produce a concise technical summary.
+
+                Rules:
+                - Use a bullet point list (markdown)
+                - Focus on: what changed, why it matters, any architectural or code quality observations
+                - Be direct and technical, no intro or outro
+                - Max 10 bullet points
+
+                ${diffText}`;
+                
                 let aiSummary = "";
 
                 if (aiProvider === "OpenAI") {
