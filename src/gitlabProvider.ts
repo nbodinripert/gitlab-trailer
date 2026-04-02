@@ -32,9 +32,8 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
     constructor() {
         this.autoRefreshInterval = setInterval(() => this.refresh(), 2 * 60 * 1000);
         
-        // CORRECTION : On passe aussi le tableau complet des reviewers actuels
-        vscode.commands.registerCommand('gitlabPulse.reRequestReview', async (projectPath: string, mrIid: number, userId: number, userName: string, currentReviewerIds: number[]) => {
-            await this.reRequestReview(projectPath, mrIid, userId, userName, currentReviewerIds);
+        vscode.commands.registerCommand('gitlabPulse.reRequestReview', async (projectPath: string, mrIid: number, userId: number, userName: string) => {
+            await this.reRequestReview(projectPath, mrIid, userId, userName);
         });
     }
 
@@ -146,9 +145,6 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
             const approvedIds = new Set(appRes.data.approved_by?.map((a: any) => a.user.id) || []);
             const reviewerStates = new Map(revRes.data.map((r: any) => [r.user.id, r.state]));
 
-            // On récupère tous les reviewers pour ne pas effacer les autres au re-request
-            const allReviewerIds = (mr.reviewers || []).map((r: any) => r.id);
-
             (mr.reviewers || []).forEach((rev: any) => {
                 const isApproved = approvedIds.has(rev.id);
                 const realState = reviewerStates.get(rev.id);
@@ -165,8 +161,7 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
                         command = { 
                             command: 'gitlabPulse.reRequestReview', 
                             title: l10n.t('reRequest', rev.name), 
-                            // CORRECTION : On passe allReviewerIds en paramètre
-                            arguments: [projectPath, mr.iid, rev.id, rev.name, allReviewerIds] 
+                            arguments: [projectPath, mr.iid, rev.id, rev.name] 
                         };
                     }
                 } else if (isApproved) {
@@ -183,36 +178,45 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
         return items;
     }
 
-    // CORRECTION MAJEURE : La méthode de re-request utilise désormais le système Unassign/Assign avec Notification
-    private async reRequestReview(projectPath: string, mrIid: number, userId: number, userName: string, currentReviewerIds: number[]) {
+    // NOUVELLE METHODE GRAPHQL POUR RE-REQUEST
+    private async reRequestReview(projectPath: string, mrIid: number, userId: number, userName: string) {
         const config = vscode.workspace.getConfiguration('gitlabTrailer');
         const token = config.get<string>('apiToken');
         const baseUrl = (config.get<string>('instanceUrl') || 'https://gitlab.com').replace(/\/$/, "");
 
-        // Affichage d'une popup de chargement pendant l'opération
         vscode.window.withProgress({ location: vscode.ProgressLocation.Notification, title: l10n.t('reRequesting', userName) }, async () => {
             try {
-                // 1. Isoler les autres reviewers
-                const withoutUser = currentReviewerIds.filter(id => id !== userId);
-                // Si l'utilisateur était le seul reviewer, on passe [0] pour vider la liste (règle API GitLab)
-                const clearIds = withoutUser.length > 0 ? withoutUser : [0];
+                // Le endpoint GraphQL de GitLab requiert le chemin "en clair" (non-url-encodé) et l'ID utilisateur au format GlobalID
+                const decodedProjectPath = decodeURIComponent(projectPath);
+                const query = `
+                    mutation reRequestReview($projectPath: ID!, $iid: String!, $userId: UserID!) {
+                        mergeRequestReviewerRereview(input: { projectPath: $projectPath, iid: $iid, userId: $userId }) {
+                            errors
+                        }
+                    }
+                `;
+                const variables = {
+                    projectPath: decodedProjectPath,
+                    iid: mrIid.toString(),
+                    userId: `gid://gitlab/User/${userId}`
+                };
 
-                // 2. Unassign le reviewer cible
-                await axios.put(`${baseUrl}/api/v4/projects/${projectPath}/merge_requests/${mrIid}`, 
-                    { reviewer_ids: clearIds },
-                    { headers: { 'PRIVATE-TOKEN': token } }
-                );
+                const res = await axios.post(`${baseUrl}/api/graphql`, {
+                    query,
+                    variables
+                }, {
+                    headers: { 'PRIVATE-TOKEN': token }
+                });
 
-                // 3. Re-assign le tableau complet (Déclenche le reset du statut + notification GitLab)
-                await axios.put(`${baseUrl}/api/v4/projects/${projectPath}/merge_requests/${mrIid}`, 
-                    { reviewer_ids: currentReviewerIds },
-                    { headers: { 'PRIVATE-TOKEN': token } }
-                );
+                // Vérification si GitLab a retourné une erreur interne à la mutation GraphQL
+                if (res.data?.errors || res.data?.data?.mergeRequestReviewerRereview?.errors?.length > 0) {
+                    throw new Error("GraphQL execution error");
+                }
 
                 vscode.window.showInformationMessage(l10n.t('reRequestSuccess', userName));
                 this.refresh();
             } catch (e) {
-                console.error("Erreur Re-request:", e);
+                console.error("Erreur GraphQL Re-request:", e);
                 vscode.window.showErrorMessage(l10n.t('error'));
             }
         });
