@@ -5,15 +5,15 @@ const l10n = {
     t: (key: string, ...args: any[]) => {
         const lang = vscode.env.language;
         const translations: any = {
-            'fr': { 'toReview': 'À Revoir', 'myOpen': 'Mes MRs Ouvertes', 'merged': 'Récemment Mergées', 'newMr': 'Nouvelle MR : {0}', 'open': 'Ouvrir', 'error': 'Erreur API GitLab', 'aiGenerating': '🤖 Génération du résumé...', 'aiSuccess': 'Résumé ajouté !', 'aiError': 'Erreur IA. Vérifiez votre clé.', 'aiNoChanges': 'Aucun changement.', 'aiAction': '✨ Générer Résumé IA', 'reRequest': 'Demander une nouvelle review à {0}' },
-            'es': { 'toReview': 'Para Revisar', 'myOpen': 'Mis MRs Abiertas', 'merged': 'Fusionadas', 'newMr': 'Nueva MR : {0}', 'open': 'Abrir', 'error': 'Error API GitLab', 'aiGenerating': '🤖 Generando...', 'aiSuccess': '¡Resumen añadido!', 'aiError': 'Error de IA.', 'aiNoChanges': 'Sin cambios.', 'aiAction': '✨ Generar Resumen IA', 'reRequest': 'Re-solicitar revisión a {0}' },
-            'de': { 'toReview': 'Zu Prüfen', 'myOpen': 'Meine Offenen MRs', 'merged': 'Zusammengeführt', 'newMr': 'Neue MR : {0}', 'open': 'Öffnen', 'error': 'GitLab-API-Fehler', 'aiGenerating': '🤖 Zusammenfassung...', 'aiSuccess': 'Hinzugefügt!', 'aiError': 'KI-Fehler.', 'aiNoChanges': 'Keine Änderungen.', 'aiAction': '✨ KI-Zusammenfassung', 'reRequest': 'Review erneut anfordern von {0}' },
-            'it': { 'toReview': 'Da Revisionare', 'myOpen': 'Le Mie MR Aperte', 'merged': 'Unite', 'newMr': 'Nuova MR : {0}', 'open': 'Apri', 'error': 'Errore API GitLab', 'aiGenerating': '🤖 Generazione...', 'aiSuccess': 'Aggiunto!', 'aiError': 'Errore IA.', 'aiNoChanges': 'Nessuna modifica.', 'aiAction': '✨ Genera Riassunto IA', 'reRequest': 'Richiedi nuova revisione a {0}' }
+            'fr': { 'toReview': 'À Revoir', 'myOpen': 'Mes MRs Ouvertes', 'merged': 'Récemment Mergées', 'newMr': 'Nouvelle MR : {0}', 'open': 'Ouvrir', 'error': 'Erreur API GitLab', 'aiGenerating': '🤖 Génération du résumé...', 'aiSuccess': 'Résumé ajouté !', 'aiError': 'Erreur IA. Vérifiez votre clé.', 'aiNoChanges': 'Aucun changement.', 'aiAction': '✨ Générer Résumé IA', 'reRequest': 'Demander une nouvelle review à {0}', 'reRequesting': '🔄 Demande en cours pour {0}...', 'reRequestSuccess': 'Nouvelle review demandée à {0} ✅' },
+            'es': { 'toReview': 'Para Revisar', 'myOpen': 'Mis MRs Abiertas', 'merged': 'Fusionadas', 'newMr': 'Nueva MR : {0}', 'open': 'Abrir', 'error': 'Error API GitLab', 'aiGenerating': '🤖 Generando...', 'aiSuccess': '¡Resumen añadido!', 'aiError': 'Error de IA.', 'aiNoChanges': 'Sin cambios.', 'aiAction': '✨ Generar Resumen IA', 'reRequest': 'Re-solicitar revisión a {0}', 'reRequesting': '🔄 Solicitando a {0}...', 'reRequestSuccess': 'Revisión solicitada a {0} ✅' },
+            'de': { 'toReview': 'Zu Prüfen', 'myOpen': 'Meine Offenen MRs', 'merged': 'Zusammengeführt', 'newMr': 'Neue MR : {0}', 'open': 'Öffnen', 'error': 'GitLab-API-Fehler', 'aiGenerating': '🤖 Zusammenfassung...', 'aiSuccess': 'Hinzugefügt!', 'aiError': 'KI-Fehler.', 'aiNoChanges': 'Keine Änderungen.', 'aiAction': '✨ KI-Zusammenfassung', 'reRequest': 'Review erneut anfordern von {0}', 'reRequesting': '🔄 Fordere an von {0}...', 'reRequestSuccess': 'Review angefordert von {0} ✅' },
+            'it': { 'toReview': 'Da Revisionare', 'myOpen': 'Le Mie MR Aperte', 'merged': 'Unite', 'newMr': 'Nuova MR : {0}', 'open': 'Apri', 'error': 'Errore API GitLab', 'aiGenerating': '🤖 Generazione...', 'aiSuccess': 'Aggiunto!', 'aiError': 'Errore IA.', 'aiNoChanges': 'Nessuna modifica.', 'aiAction': '✨ Genera Riassunto IA', 'reRequest': 'Richiedi nuova revisione a {0}', 'reRequesting': '🔄 Richiesta a {0}...', 'reRequestSuccess': 'Revisione richiesta a {0} ✅' }
         };
         const set = translations[lang] || { 
             'toReview': 'To Review', 'myOpen': 'My Open MRs', 'merged': 'Recently Merged', 
             'newMr': 'New MR: {0}', 'open': 'Open', 'error': 'GitLab API Error',
-            'aiGenerating': '🤖 Generating summary...', 'aiSuccess': 'Summary added!', 'aiError': 'AI Error.', 'aiNoChanges': 'No changes.', 'aiAction': '✨ Generate AI Summary', 'reRequest': 'Re-request review from {0}'
+            'aiGenerating': '🤖 Generating summary...', 'aiSuccess': 'Summary added!', 'aiError': 'AI Error.', 'aiNoChanges': 'No changes.', 'aiAction': '✨ Generate AI Summary', 'reRequest': 'Re-request review from {0}', 'reRequesting': '🔄 Re-requesting from {0}...', 'reRequestSuccess': 'Review re-requested from {0} ✅'
         };
         let text = set[key] || key;
         args.forEach((val, i) => text = text.replace(`{${i}}`, val));
@@ -31,9 +31,10 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
 
     constructor() {
         this.autoRefreshInterval = setInterval(() => this.refresh(), 2 * 60 * 1000);
-        // Enregistrement de la commande interne pour le re-request
-        vscode.commands.registerCommand('gitlabPulse.reRequestReview', async (projectPath: string, mrIid: number, userId: number, userName: string) => {
-            await this.reRequestReview(projectPath, mrIid, userId, userName);
+        
+        // CORRECTION : On passe aussi le tableau complet des reviewers actuels
+        vscode.commands.registerCommand('gitlabPulse.reRequestReview', async (projectPath: string, mrIid: number, userId: number, userName: string, currentReviewerIds: number[]) => {
+            await this.reRequestReview(projectPath, mrIid, userId, userName, currentReviewerIds);
         });
     }
 
@@ -74,7 +75,6 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
                 const { data: user } = await axios.get(`${baseUrl}/api/v4/user`, { headers: { 'PRIVATE-TOKEN': token } });
                 this.myUserId = user.id;
             }
-            // Mappe la section vers le filtre d'API
             let stateFilter = "opened";
             let authorId = undefined;
             let reviewerId = undefined;
@@ -97,7 +97,6 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
                 const item = new MRItem(mr.title, isOwned ? "mr-item-owned" : "mr-item", vscode.TreeItemCollapsibleState.Expanded, new vscode.ThemeIcon("git-merge", new vscode.ThemeColor("descriptionForeground")));
                 item.description = `!${mr.iid}`;
                 item.mrData = mr;
-                // Le titre de la MR reste cliquable pour ouvrir GitLab
                 item.command = { command: 'vscode.open', title: "Open", arguments: [vscode.Uri.parse(mr.web_url)] };
                 return item;
             });
@@ -121,7 +120,6 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
     private async getMRDetails(mr: any, baseUrl: string, token: string, projectPath: string, isOwned: boolean): Promise<MRItem[]> {
         const items: MRItem[] = [];
         
-        // --- BOUTON IA ---
         if (isOwned) {
             const config = vscode.workspace.getConfiguration('gitlabTrailer');
             const aiApiKey = config.get<string>('aiApiKey');
@@ -133,11 +131,9 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
             }
         }
 
-        // Labels (Non cliquables)
         if (mr.labels?.length > 0) {
             mr.labels.forEach((l: string) => {
                 const labelItem = new MRItem(l, "label", vscode.TreeItemCollapsibleState.None, new vscode.ThemeIcon("tag", new vscode.ThemeColor("charts.purple")));
-                // Supprimer le curseur main/pointer en ne mettant pas de command
                 items.push(labelItem);
             });
         }
@@ -150,6 +146,9 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
             const approvedIds = new Set(appRes.data.approved_by?.map((a: any) => a.user.id) || []);
             const reviewerStates = new Map(revRes.data.map((r: any) => [r.user.id, r.state]));
 
+            // On récupère tous les reviewers pour ne pas effacer les autres au re-request
+            const allReviewerIds = (mr.reviewers || []).map((r: any) => r.id);
+
             (mr.reviewers || []).forEach((rev: any) => {
                 const isApproved = approvedIds.has(rev.id);
                 const realState = reviewerStates.get(rev.id);
@@ -161,13 +160,13 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
 
                 if (requestedChanges) {
                     icon = new vscode.ThemeIcon("error", new vscode.ThemeColor("charts.red"));
-                    // Rendre la ligne cliquable pour re-request seulement si l'utilisateur est l'auteur
                     if (isOwned) {
                         context = "rev-action-needed";
                         command = { 
                             command: 'gitlabPulse.reRequestReview', 
                             title: l10n.t('reRequest', rev.name), 
-                            arguments: [projectPath, mr.iid, rev.id, rev.name] 
+                            // CORRECTION : On passe allReviewerIds en paramètre
+                            arguments: [projectPath, mr.iid, rev.id, rev.name, allReviewerIds] 
                         };
                     }
                 } else if (isApproved) {
@@ -184,26 +183,42 @@ export class GitLabProvider implements vscode.TreeDataProvider<MRItem> {
         return items;
     }
 
-    private async reRequestReview(projectPath: string, mrIid: number, userId: number, userName: string) {
+    // CORRECTION MAJEURE : La méthode de re-request utilise désormais le système Unassign/Assign avec Notification
+    private async reRequestReview(projectPath: string, mrIid: number, userId: number, userName: string, currentReviewerIds: number[]) {
         const config = vscode.workspace.getConfiguration('gitlabTrailer');
         const token = config.get<string>('apiToken');
         const baseUrl = (config.get<string>('instanceUrl') || 'https://gitlab.com').replace(/\/$/, "");
 
-        try {
-            // GitLab API : Pour "re-request", on "unassign" puis "assign" le reviewer ou on utilise l'endpoint de refresh
-            // La méthode la plus fiable en API v4 pour déclencher une notification de re-review :
-            await axios.put(`${baseUrl}/api/v4/projects/${projectPath}/merge_requests/${mrIid}`, 
-                { reviewer_ids: [userId] }, // Ré-assigner force le statut à "unreviewed"
-                { headers: { 'PRIVATE-TOKEN': token } }
-            );
-            vscode.window.showInformationMessage(l10n.t('aiSuccess')); // Réutilisation du message succès ou similaire
-            this.refresh();
-        } catch (e) {
-            vscode.window.showErrorMessage(l10n.t('error'));
-        }
+        // Affichage d'une popup de chargement pendant l'opération
+        vscode.window.withProgress({ location: vscode.ProgressLocation.Notification, title: l10n.t('reRequesting', userName) }, async () => {
+            try {
+                // 1. Isoler les autres reviewers
+                const withoutUser = currentReviewerIds.filter(id => id !== userId);
+                // Si l'utilisateur était le seul reviewer, on passe [0] pour vider la liste (règle API GitLab)
+                const clearIds = withoutUser.length > 0 ? withoutUser : [0];
+
+                // 2. Unassign le reviewer cible
+                await axios.put(`${baseUrl}/api/v4/projects/${projectPath}/merge_requests/${mrIid}`, 
+                    { reviewer_ids: clearIds },
+                    { headers: { 'PRIVATE-TOKEN': token } }
+                );
+
+                // 3. Re-assign le tableau complet (Déclenche le reset du statut + notification GitLab)
+                await axios.put(`${baseUrl}/api/v4/projects/${projectPath}/merge_requests/${mrIid}`, 
+                    { reviewer_ids: currentReviewerIds },
+                    { headers: { 'PRIVATE-TOKEN': token } }
+                );
+
+                vscode.window.showInformationMessage(l10n.t('reRequestSuccess', userName));
+                this.refresh();
+            } catch (e) {
+                console.error("Erreur Re-request:", e);
+                vscode.window.showErrorMessage(l10n.t('error'));
+            }
+        });
     }
 
-    // [Logique IA existante...]
+    // [Logique IA existante]
     public async generateSummary(item: MRItem) {
         const config = vscode.workspace.getConfiguration('gitlabTrailer');
         const token = config.get<string>('apiToken');
