@@ -20,6 +20,4 @@ out/test/**
 !out/
 !out/extension.js
 !out/gitlabProvider.js
-!package.nls.json
-!package.nls.*.json
 !icon.png
