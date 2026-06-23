@@ -1,0 +1,22 @@
+{
+    "view.toReview": "Para Revisar",
+    "view.myOpenMrs": "Mis MRs Abiertas",
+    "view.recentlyMerged": "Recientemente Fusionadas",
+    "msg.newToken": "📥 Nueva MR a revisar: {0}",
+    "msg.open": "Abrir",
+    "config.token": "Tu token de acceso personal de GitLab",
+    "config.project": "La ruta completa de tu proyecto",
+    "config.instance": "URL de tu instancia de GitLab",
+    "config.aiProvider": "Elige tu proveedor de IA",
+    "config.aiApiKey": "Clave API de tu proveedor de IA",
+    "welcome.content": "Bienvenido a GitLab Pulse.\nPara empezar, configura tu Token y la Ruta del Proyecto.\n[Configurar ajustes](command:workbench.action.openSettings?%22gitlabTrailer%22)",
+    "extension.description": "Seguimiento inteligente y resúmenes por IA para tus Merge Requests de GitLab.",
+    "error.gitlab": "Error API GitLab",
+    "ai.generating": "🤖 Generando resumen...",
+    "ai.success": "¡Resumen añadido!",
+    "ai.error": "Error de IA. Detalles: {0}",
+    "ai.action": "✨ Generar Resumen IA",
+    "review.reRequest": "Re-solicitar revisión a {0}",
+    "review.reRequesting": "🔄 Solicitando a {0}...",
+    "review.reRequestSuccess": "Revisión solicitada a {0} ✅"
+}

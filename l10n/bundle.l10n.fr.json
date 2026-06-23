@@ -10,5 +10,13 @@
     "config.aiProvider": "Choisissez votre fournisseur d'IA",
     "config.aiApiKey": "Clé API du fournisseur d'IA",
     "welcome.content": "Bienvenue dans GitLab Pulse.\nPour commencer, configurez votre Token et le chemin du projet.\n[Configurer les paramètres](command:workbench.action.openSettings?%22gitlabTrailer%22)",
-    "extension.description": "Suivi intelligent et résumés par IA pour vos Merge Requests GitLab."
+    "extension.description": "Suivi intelligent et résumés par IA pour vos Merge Requests GitLab.",
+    "error.gitlab": "Erreur API GitLab",
+    "ai.generating": "🤖 Génération du résumé...",
+    "ai.success": "Résumé ajouté !",
+    "ai.error": "Erreur IA. Détails : {0}",
+    "ai.action": "✨ Générer Résumé IA",
+    "review.reRequest": "Demander une nouvelle review à {0}",
+    "review.reRequesting": "🔄 Demande en cours pour {0}...",
+    "review.reRequestSuccess": "Nouvelle review demandée à {0} ✅"
 }

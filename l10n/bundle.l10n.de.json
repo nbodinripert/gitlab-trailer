@@ -1,0 +1,22 @@
+{
+    "view.toReview": "Zu Prüfen",
+    "view.myOpenMrs": "Meine Offenen MRs",
+    "view.recentlyMerged": "Kürzlich Zusammengeführt",
+    "msg.newToken": "📥 Neue MR zu prüfen: {0}",
+    "msg.open": "Öffnen",
+    "config.token": "Dein persönliches GitLab-Zugangstoken",
+    "config.project": "Der vollständige Pfad deines Projekts",
+    "config.instance": "URL deiner GitLab-Instanz",
+    "config.aiProvider": "Wähle deinen KI-Anbieter",
+    "config.aiApiKey": "API-Schlüssel deines KI-Anbieters",
+    "welcome.content": "Willkommen bei GitLab Pulse.\nKonfiguriere zunächst dein Token und den Projektpfad.\n[Einstellungen öffnen](command:workbench.action.openSettings?%22gitlabTrailer%22)",
+    "extension.description": "Intelligentes Tracking und KI-Zusammenfassungen für deine GitLab Merge Requests.",
+    "error.gitlab": "GitLab-API-Fehler",
+    "ai.generating": "🤖 Generiere Zusammenfassung...",
+    "ai.success": "Zusammenfassung hinzugefügt!",
+    "ai.error": "KI-Fehler. Details: {0}",
+    "ai.action": "✨ KI-Zusammenfassung generieren",
+    "review.reRequest": "Review erneut anfordern von {0}",
+    "review.reRequesting": "🔄 Fordere an von {0}...",
+    "review.reRequestSuccess": "Review angefordert von {0} ✅"
+}
